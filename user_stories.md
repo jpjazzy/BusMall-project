@@ -8,7 +8,7 @@ As a developer, show the results of selections after the user has selected 25 go
 As a user, I want to select from a list of 3 products shown.
 As a user, I do not want to see items shown multiple times in a row.
 As a user, I want to see my results at the end in numerical order.
-As a user, I want to visually know how many selections I am going to need to make and my progress.
+As a user, I want to visually know how many selections I am going to need to make and my progress.  
 
 As a client, I want something that is similar to the sky mall layout.
 As a client, I want to only display products to users that are going to sell.
