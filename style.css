@@ -20,10 +20,10 @@ header {
 footer {
   background: linear-gradient(#B20300, #fff);
   text-align: center;
-  position:absolute;
+  position: fixed;
   bottom:0;
   width:100%;
-  height:60px;   /* Height of the footer */
+  height:50px;   /* Height of the footer */
 }
 
 header h1 {
@@ -53,4 +53,13 @@ header strong {
 #image_container img:hover {
   opacity: 1;
   cursor: pointer;
+}
+
+#progress {
+  text-align: center;
+}
+
+#statistics p {
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
