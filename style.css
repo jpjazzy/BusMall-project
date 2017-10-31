@@ -8,17 +8,24 @@
 * Tertiary: #00FF50
 *
 ***************************************/
+@import url('https://fonts.googleapis.com/css?family=Lobster');
+
 body {
+  color: #00B238;
   background: #B20300;
 }
 
 header {
-  background: linear-gradient(#fff, #B20300);
+  background: linear-gradient(#000, #B20300);
   text-align: center;
 }
 
+header h1 {
+  font-family: 'Lobster', cursive;
+}
+
 footer {
-  background: linear-gradient(#B20300, #fff);
+  background: linear-gradient(#B20300, #000);
   text-align: center;
   position: fixed;
   bottom:0;
@@ -59,7 +66,8 @@ header strong {
   text-align: center;
 }
 
-#statistics p {
+#image_container p {
+  color: #00FF50;
   margin-top: 10px;
   margin-bottom: 10px;
 }
