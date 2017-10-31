@@ -74,6 +74,17 @@ function displayRandomImages() {
     image2.style.display = 'none';
     image3.style.display = 'none';
     progress.style.display = 'none';
+    imageContainer.style.display = 'none';
+
+    //change subheading information
+    var subheadingInfo = document.getElementById('subheading_info');
+    console.log('subheading info', subheadingInfo);
+    subheadingInfo.innerHTML = 'Analytical information';
+
+    //show charts
+    showClickChart();
+    showPercChart();
+    showShownChart();
 
     //turn off event listeners
     image1.removeEventListener('click', onClickData);
@@ -147,3 +158,228 @@ displayRandomImages();
 image1.addEventListener('click', onClickData);
 image2.addEventListener('click', onClickData);
 image3.addEventListener('click', onClickData);
+
+function showPercChart() {
+  var ctx = document.getElementById('my_per_chart').getContext('2d');
+  var chartContainer = document.getElementById('chart_container');
+  ctx.canvas.width = 960;
+
+  //Create chart labels
+  var chartLabels = [];
+  for (var i = 0; i < arrOfProd.length; i++) {
+    chartLabels.push(arrOfProd[i].name);
+  }
+
+  var dataLabels = [];
+  var percSelected;
+  for (i = 0; i < arrOfProd.length; i++) {
+    percSelected = Math.round(arrOfProd[i].clicks / arrOfProd[i].totalShown * 100);
+    dataLabels.push(percSelected);
+  }
+
+  var chart = new Chart(ctx, {
+    // The type of chart we want to create
+    type: 'horizontalBar',
+
+    // The data for our dataset
+    data: {
+      labels: chartLabels,
+      datasets: [{
+        label: 'Product Results (%\'s selected)',
+        backgroundColor: '#00FF50',
+        borderColor: '#00FF50',
+        data: dataLabels,
+      }]
+    },
+
+    // Configuration options go here
+    options: {
+      legend: {
+        labels: {
+          fontColor: '#00B238', // label color for the heading label
+          fontSize: 30 // font size on top label
+        }
+      },
+      scales: {
+        xAxes: [{
+          scaleLabel: {
+            display: true,
+            labelString: 'Percentage of the time product was selected (%)',
+            fontColor: '#00B238' //font colors and labels for x axis label
+          },
+          ticks: {
+            fontColor: '#00B238'//x axis product colors
+          },
+          gridLines: {
+            display: false,
+            color: '#00B238' //grid line color with x axis
+          }
+        }],
+        yAxes: [{
+          scaleLabel: {
+            display: true,
+            labelString: 'Product names',
+            fontColor: '#00B238' //font colors and labels for y axis label
+          },
+          ticks: {
+            fontColor: '#00B238' //y axis product colors
+          },
+          gridLines: {
+            display: true,
+            color: '#00B238' //grid line color with y axis
+          }
+        }]
+      }
+    }
+  });
+
+  chartContainer.style.display = 'block';
+}
+
+function showClickChart() {
+  var ctx = document.getElementById('my_click_chart').getContext('2d');
+  var chartContainer = document.getElementById('chart_container');
+
+  //Create chart labels
+  var chartLabels = [];
+  for (var i = 0; i < arrOfProd.length; i++) {
+    chartLabels.push(arrOfProd[i].name);
+  }
+
+  var dataLabels = [];
+  for (i = 0; i < arrOfProd.length; i++) {
+    dataLabels.push(arrOfProd[i].clicks);
+  }
+
+  var chart = new Chart(ctx, {
+    // The type of chart we want to create
+    type: 'horizontalBar',
+
+    // The data for our dataset
+    data: {
+      labels: chartLabels,
+      datasets: [{
+        label: 'Product Results (Times clicked)',
+        backgroundColor: '#00FF50',
+        borderColor: '#00FF50',
+        data: dataLabels,
+      }]
+    },
+
+    // Configuration options go here
+    options: {
+      legend: {
+        labels: {
+          fontColor: '#00B238', // label color for the heading label
+          fontSize: 30 // font size on top label
+        }
+      },
+      scales: {
+        xAxes: [{
+          scaleLabel: {
+            display: true,
+            labelString: 'Total number of times clicked',
+            fontColor: '#00B238' //font colors and labels for x axis label
+          },
+          ticks: {
+            fontColor: '#00B238'//x axis product colors
+          },
+          gridLines: {
+            display: false,
+            color: '#00B238' //grid line color with x axis
+          }
+        }],
+        yAxes: [{
+          scaleLabel: {
+            display: true,
+            labelString: 'Product names',
+            fontColor: '#00B238' //font colors and labels for y axis label
+          },
+          ticks: {
+            fontColor: '#00B238' //y axis product colors
+          },
+          gridLines: {
+            display: true,
+            color: '#00B238' //grid line color with y axis
+          }
+        }]
+      }
+    }
+  });
+
+  chartContainer.style.display = 'block';
+}
+
+function showShownChart() {
+  var ctx = document.getElementById('my_shown_chart').getContext('2d');
+  var chartContainer = document.getElementById('chart_container');
+
+  //Create chart labels
+  var chartLabels = [];
+  for (var i = 0; i < arrOfProd.length; i++) {
+    chartLabels.push(arrOfProd[i].name);
+  }
+
+  var dataLabels = [];
+  for (i = 0; i < arrOfProd.length; i++) {
+    dataLabels.push(arrOfProd[i].totalShown);
+  }
+
+  var chart = new Chart(ctx, {
+    // The type of chart we want to create
+    type: 'horizontalBar',
+
+    // The data for our dataset
+    data: {
+      labels: chartLabels,
+      datasets: [{
+        label: 'Product Results (Times shown)',
+        backgroundColor: '#00FF50',
+        borderColor: '#00FF50',
+        data: dataLabels,
+      }]
+    },
+
+    // Configuration options go here
+    options: {
+      legend: {
+        labels: {
+          fontColor: '#00B238', // label color for the heading label
+          fontSize: 30 // font size on top label
+        }
+      },
+      scales: {
+        xAxes: [{
+          scaleLabel: {
+            display: true,
+            labelString: 'Total number of times shown',
+            fontColor: '#00B238' //font colors and labels for x axis label
+          },
+          ticks: {
+            fontColor: '#00B238'//x axis product colors
+          },
+          gridLines: {
+            display: false,
+            color: '#00B238' //grid line color with x axis
+          }
+        }],
+        yAxes: [{
+          scaleLabel: {
+            display: true,
+            labelString: 'Product names',
+            fontColor: '#00B238' //font colors and labels for y axis label
+          },
+          ticks: {
+            fontColor: '#00B238' //y axis product colors
+          },
+          gridLines: {
+            display: true,
+            color: '#00B238' //grid line color with y axis
+          }
+        }]
+      }
+    }
+  });
+
+  chartContainer.style.display = 'block';
+}

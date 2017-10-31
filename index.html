@@ -8,14 +8,21 @@
   <body>
     <header>
     <h1>Bus Mall Product Testing</h1>
-    <p><strong>Instructions:</strong> Select the product you would be most likely to buy from the 3 generated products.</p>
+    <p id="subheading_info"><strong>Instructions:</strong> Select the product you would be most likely to buy from the 3 generated products.</p>
     </header>
     <div id ="image_container">
       <img id="image1" class="product" src="http://placehold.it/300x200" alt="image 1 of 3"  />
       <img id="image2" class="product" src="http://placehold.it/300x200" alt="image 2 of 3"  />
       <img id="image3" class="product" src="http://placehold.it/300x200" alt="image 3 of 3"  />
+
     </div>
-    <div id="progress"></div> 
+    <div id="progress"></div>
+    <div id="chart_container">
+      <canvas id="my_click_chart" width="960" height="400"></canvas>
+      <canvas id="my_per_chart" width="960" height="400"></canvas>
+      <canvas id="my_shown_chart" width="960" height="400"></canvas>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
     <script src="app.js"></script>
   </body>
   <footer>
