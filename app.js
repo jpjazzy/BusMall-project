@@ -7,6 +7,7 @@ function Product(name, path) {
   this.totalShown = 0;
   this.clicks = 0;
   this.justShown = false;
+  this.selectedPercentage = 0;
 }
 
 //generate random integer number function
@@ -70,6 +71,8 @@ function displayRandomImages() {
       newPTag.innerHTML = 'Product: ' + arrOfProd[j].name + ', Number of times shown: ' + arrOfProd[j].totalShown + ', Number of times selected: ' + arrOfProd[j].clicks + ', % of time selected: ' + prodPercent + '%';
       imageContainer.appendChild(newPTag);
     }
+
+    saveProductData();
     image1.style.display = 'none';
     image2.style.display = 'none';
     image3.style.display = 'none';
@@ -383,3 +386,56 @@ function showShownChart() {
 
   chartContainer.style.display = 'block';
 }
+
+function saveProductData() {
+  console.log('--SAVING FUNCTION--');
+  var prodPercent = [];
+  var percSelected;
+  var timesShown = [];
+  var numClicks = [];
+  //Create arrays of saved data for each needed property on objects
+  for (var i = 0; i < arrOfProd.length; i++) {
+    percSelected = Math.round(arrOfProd[i].clicks / arrOfProd[i].totalShown * 100);
+    prodPercent.push(percSelected);
+    timesShown.push(arrOfProd[i].totalShown);
+    numClicks.push(arrOfProd[i].clicks);
+  }
+  //save local data to be loaded
+  localStorage.percSelected = prodPercent;
+  localStorage.timesShown = timesShown;
+  localStorage.numClicks = numClicks;
+  console.log('Percent Selected Arr:', localStorage.percSelected);
+  console.log('Times Shown Arr:', localStorage.timesShown);
+  console.log('Number of Clicks Arr:', localStorage.numClicks);
+
+}
+
+function loadProductData() {
+  console.log('--LOADING FUNCTION--');
+  //load values that need updating as arrays and parse them into proper numbers
+  var prodPercent = localStorage.percSelected.split(',');
+  var timesShown = localStorage.timesShown.split(',');
+  var numClicks = localStorage.numClicks.split(',');
+
+  for (var i = 0; i < prodPercent.length; i++) {
+    prodPercent[i] = parseInt(prodPercent[i]);
+    timesShown[i] = parseInt(timesShown[i]);
+    numClicks[i] = parseInt(numClicks[i]);
+  }
+
+  //update values in objects
+  for (i = 0; i < arrOfProd.length; i++) {
+    arrOfProd[i].clicks = numClicks[i];
+    arrOfProd[i].totalShown = timesShown[i];
+    arrOfProd[i].selectedPercentage = prodPercent[i];
+  }
+
+  console.log('arrOfProd', arrOfProd);
+}
+
+//loads data upon loading the page
+window.onload = function () {
+  if (!localStorage.percSelected) return; //does nothing more if local storage does not exist
+
+  loadProductData();
+};
